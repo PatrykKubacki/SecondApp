@@ -1,0 +1,12 @@
+﻿@using WebApplication1.Models
+@model Person
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<div>
+    <h1>Nazwisko: @Model.Name</h1>
+    <h3>Wiek: @Model.Age</h3>
+    <br />
+        @Html.ActionLink("Przejdz do kolejnej strony zioom", "SecondPage", "Home", null, new { @class = "waves-effect waves-light btn" })
+</div>
