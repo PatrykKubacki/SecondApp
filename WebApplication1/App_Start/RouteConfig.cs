@@ -21,3 +21,9 @@ namespace WebApplication1
         }
     }
 }
+
+/*
+W tej klasie definiujemy sobie ścieżki routingu miedzy innymi po to, żeby Query string nie wygladał:
+ //localhost:15487/Produtc/Index/?page=10  a tak:
+ //localhost:15487/Strona10
+*/

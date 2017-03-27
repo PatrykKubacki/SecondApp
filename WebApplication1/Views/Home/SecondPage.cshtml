@@ -1,18 +1,21 @@
 ﻿@using WebApplication1.Models
+@* Zapis składni razor (silnika widoku) wiążcy nam nasz widok z modelem, w tym przypadku modelem widoku jest SEKWENCJA osób *@
 @model IEnumerable<Person>
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml"; //ustawienia layoutu
 }
-<div class="container">
-    <table class="striped">
-        <thead>
-        <tr>
+
+<div class="container"> @*klasa container to kontener na nasz kontent dodaje marginesy itd.*@
+    <table class="striped"> @*Nasza tabela osób*@
+        <thead>@*Nagłowek tabeli*@
+        <tr>@*Wiersz nagłówka*@
             <th data-field="name">Nazwa</th>
             <th data-field="age">Wiek</th>
         </tr>
         </thead>
 
-        <tbody>
+        <tbody>@*ciało tabeli*@
+@*Pątla foreach enumerujaca po naszym modelu czyli sekwencji osób i generująca kolejne wiersze pokolei*@
         @foreach (var person in Model) {
             <tr>
                 <td>@person.Name</td>

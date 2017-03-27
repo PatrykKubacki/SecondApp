@@ -1,0 +1,38 @@
+﻿@using WebApplication1.Entities
+@* Zapis składni razor (silnika widoku) wiążcy nam nasz widok z modelem, w tym przypadku modelem widoku jest lista produktów *@
+@model List<Product> 
+@{
+    ViewBag.Title = "Index"; //Ustawiamy tytuł strony
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Ustawiamy Layout strony
+}
+
+<h2>Produkty</h2>
+@*Tabela z naszymi produktami *@
+<table class="striped"> 
+    <thead> @*Nagłówek*@
+        <tr>@*Wiersz nagłówka*@
+            <th>Nazwa</th> 
+            <th>Opis</th>
+            <th>Cena</th>
+            <th>Kategoria</th>
+        </tr>
+    </thead>
+    <tbody>@*Ciało tabeli*@
+@*Poniżej petla foreach która enumeruje nam po naszych obiektach w liście generując kolejne wiesze w naszej tabeli produktów*@
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@product.Price.ToString("C")</td> @*Metoda Tostring z parametrem C oznacza format walutowy*@
+            <td>@product.Category</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+
+
+
+

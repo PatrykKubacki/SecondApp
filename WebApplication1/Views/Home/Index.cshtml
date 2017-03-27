@@ -1,12 +1,19 @@
 ﻿@using WebApplication1.Models
+@* Zapis składni razor (silnika widoku) wiążcy nam nasz widok z modelem, w tym przypadku modelem widoku jest model osoby*@
 @model Person
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    Layout = "~/Views/Shared/_Layout.cshtml"; //przypisanie layoutu
 }
 
 <div>
-    <h1>Nazwisko: @Model.Name</h1>
+    <h1>Nazwisko: @Model.Name</h1> @*odwołanie do modelu, czyli równowazne z person.Name bo naszym modelem jest person*@
     <h3>Wiek: @Model.Age</h3>
     <br />
+    @*HTML to statyczna klasa pomocnicza, w przeglądarce generowane sa znaczniki html ale programisci dla wygody moga sie poslugiwać metodami pomocniczymi zamiast pamietac skladnie znacznikow
+        Action link generuje znacznik <a/> czyli link, pierwszym argumentem metody jest to co ma być wyswietlone jako link, nastepny to akcja controllera, nastepny to controller, kolejny to 
+        parametety routingu, a kolejny to atrybuty htmlowe dzięki czemu mozemy podać jakie klasy cssowe beda mieć wygenerowane metode pomocnicza znaczniki oczywiscie taka liczba orgumentów to jedno z przeciążeń
+        funkcji Action Link bo mozemy podać ich mniej i również zadziała. Zależy od potrzeb
+        *@
         @Html.ActionLink("Przejdz do kolejnej strony zioom", "SecondPage", "Home", null, new { @class = "waves-effect waves-light btn" })
+        @Html.ActionLink("Przejdz do listy produktów","Index","Product", null, new { @class = "waves-effect waves-light btn" })
 </div>

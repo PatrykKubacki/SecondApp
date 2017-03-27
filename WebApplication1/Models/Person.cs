@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿/*
+ Nasza klasa person mająca tylko dwie propercje na Nazwe oraz wiek
+ */
 namespace WebApplication1.Models
 {
     public class Person

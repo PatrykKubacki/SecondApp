@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@*Layout to nic innego jak szablon naszej strony, tak zwana czesc wspolna a zawarotść stron zostanie wyświetlana wewnątrz (metoda RenderBody)*@
+<!DOCTYPE html>
 
 <html>
-<head>
+<head>@*nagłówek, miejsce na meta dane, deklaracje skryptów, arkuszy css, tytuł*@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link type="text/css" rel="stylesheet" href="~/content/materialize/css/materialize.min.css" media="screen,projection" />
@@ -9,13 +10,14 @@
     <script type="text/javascript" src="~/Scripts/materialize/materialize.min.js"></script>
 </head>
 <body>
-    <nav>
+    <nav>@*nasz navigation bar, bedzie dostepny na gorze strony na każdej stronie gdzie bedzie zadeklarowany ten layout*@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Nasza appka ;)</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down"></ul>
         </div>
     </nav>
 <div class="container">
+    @*ciało wywoływanych stron*@
     @RenderBody()
 </div>
 </body>
