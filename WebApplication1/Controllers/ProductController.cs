@@ -4,6 +4,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using WebApplication1.Entities;
 
@@ -51,6 +52,64 @@ namespace WebApplication1.Controllers
             //zwracamy liste produktów domyślnych 
             return _products;
         }
+
+        //Akcja obsługująca przycisk usuwania produktów, jako argument dostaje identyfikator
+        public ActionResult Delete(int? id)
+        {
+            //pobieramy produkt z naszej listy o identyfikatorze równym identyfikatorowi z argumentu metody (id)
+            var product = GetProducts().FirstOrDefault(p => p.Id == id);
+            //Usuniecie produktu z naszej listy produktu 
+            GetProducts().Remove(product);
+            //Przekierowanie do metody index z tego kontrolera (jest wyżej)
+            return RedirectToAction("Index");
+        }
+
+        //Metoda Edit zwracajaca formularz z produktem jest to metoda [httpget] domyslnie każda metoda jest typu get, metode post trzeba poprzedzic atrybutem [httpost]
+        public ViewResult Edit(int? id)
+        {
+            //pobieramy produkt o takim identyfikatorze jak arugemnt metody
+            var product = GetProducts().FirstOrDefault(p => p.Id == id);
+            //przekazujemy go do widoku Edit (formularz edycji)
+            return View(product);
+        }
+
+        //Przeciążona metoda Edit ta wyżej typu get zwraca formularz, a ta niżej typu post odbiera dane i dokonuje podmiany produktu
+        [HttpPost]
+        public ActionResult Edit(Product newProduct)
+        {
+            //pobieramy produkt o takim identyfikatorze jak ten edytowany produkt
+            var product = GetProducts().FirstOrDefault(p => p.Id == newProduct.Id);
+            //jesli nie ma takiego produktu dodajemy go do list
+            if (product == null)
+            {
+                //dodanie nowego produktu do listy
+                GetProducts().Add(newProduct);
+                //przekierowanie do metody index czyli wyswietlenie listy produktow wszystkich
+                return RedirectToAction("Index");
+            }
+            //ponizej podmiana danych na te nowe
+            product.Category = newProduct.Category;
+            product.Price = newProduct.Price;
+            product.Description = newProduct.Description;
+            product.Name = newProduct.Name;
+            //przekierowanei do metody index 
+            return RedirectToAction("Index");
+        }
+
+        //Metoda tworzy nowy produkt i przekazuje do widoku Edit, poniewaz dodawanie i edycja to taki sam formularz
+        public ActionResult Create()
+        {
+            //pobieramy liczbe produktow w liscie
+            var count = GetProducts().Count;
+            //tworzenie nowego produktu 
+            var product = new Product {Id = ++count} ;
+            //przekazanie nowego produktu do widoku Edit, w metodzie edit nie bedzie produktu z takim identyifikatorem wiec zostanie dodawny nowy.
+            return View("Edit", product);
+        }
     }
 }
-
+/*
+ jako identyfikator zlym podejsciem jest pobieranie (liczby elementow + 1) lepszym podejsciem jest pobieranie identyfikatora ostatniego elementu,
+ W najlepszym wypadku za przyznawanie identyfikatorów odpowiada system zarządzania baza danych np MSSQLServer, Tak samo złym podejściem jest 
+ żeby metody typu Edit wewnatrz ich ciała doknowywałą sie edycja, najlpeszym rozwizaniem jest uzycie wzorca Repozytorium .
+     */

@@ -10,26 +10,33 @@
 @*Tabela z naszymi produktami *@
 <table class="striped"> 
     <thead> @*Nagłówek*@
-        <tr>@*Wiersz nagłówka*@
-            <th>Nazwa</th> 
-            <th>Opis</th>
-            <th>Cena</th>
-            <th>Kategoria</th>
-        </tr>
+    <tr>@*Wiersz nagłówka*@
+        <th>Nazwa</th> 
+        <th>Opis</th>
+        <th>Cena</th>
+        <th>Kategoria</th>
+        <th>Usunięcie</th>@*Dwie nowe kolumny*@
+        <th>Edycja</th>
+    </tr>
     </thead>
     <tbody>@*Ciało tabeli*@
-@*Poniżej petla foreach która enumeruje nam po naszych obiektach w liście generując kolejne wiesze w naszej tabeli produktów*@
+    @*Poniżej petla foreach która enumeruje nam po naszych obiektach w liście generując kolejne wiesze w naszej tabeli produktów*@
     @foreach (var product in Model)
     {
         <tr>
             <td>@product.Name</td>
             <td>@product.Description</td>
             <td>@product.Price.ToString("C")</td> @*Metoda Tostring z parametrem C oznacza format walutowy*@
-            <td>@product.Category</td>
+            <td>@product.Category</td>@*Poniżej dwa przyciski odpowiedzialne za wywołanie metod delete oraz edit contollera Product*@
+            <td>@Html.ActionLink("Usuń","Delete","Product", new{id = product.Id}, new{@class= "waves-effect waves-light btn", onclick="return confirm('Czy na pewno chcesz usunąć ten produkt kolego');" })</td>
+            <td>@Html.ActionLink("Edycja","Edit","Product", new{id = product.Id}, new{@class= "waves-effect waves-light btn" })</td>
         </tr>
     }
     </tbody>
 </table>
+@*Przycisk odpowiedzialny za wywołanie metody Create z controllera Product*@
+@Html.ActionLink("Dodaj nowy", "Create", "Product", null, new { @class = "waves-effect waves-light btn" })
+
 
 
 

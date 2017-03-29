@@ -1,0 +1,37 @@
+﻿@model WebApplication1.Entities.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit @Model.Name</h2>
+@*Otwarzcie formularza ktory wysyłą dane do metody Edit controllera product *@
+@using (Html.BeginForm("Edit","Product")) {
+    @*Ukryte pole na idetyfikator*@
+    @Html.HiddenFor(p=>p.Id)
+    <div class="row">@*Wiersz z polami na nazwe oraz kategorie*@
+        <div class="input-field col s6">
+            @Html.LabelFor(p=>p.Name)
+            @Html.EditorFor(p=>p.Name)
+        </div>
+        <div class="input-field col s6">
+            @Html.LabelFor(p=>p.Category)
+            @Html.EditorFor(p=>p.Category)
+        </div>
+    </div> 
+    
+    <div class="row">
+        <div class="input-field col s6">
+            @Html.LabelFor(p=>p.Description)
+            @Html.EditorFor(p=>p.Description)
+        </div>
+        <div class="input-field col s6">
+            @Html.LabelFor(p=>p.Price)
+            @Html.EditorFor(p=>p.Price)
+        </div>
+    </div> 
+@*przycisk wysyłający do metody edit controllera product*@
+    <input type="submit" class="waves-effect waves-light btn" value="Wyslij"/>
+}
+
